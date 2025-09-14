@@ -11,4 +11,7 @@ double iconsize0 = 72,
     iconsize6 = 12,
     iconsize7 = 11;
 
-IconData lighticon = Icons.light_mode_outlined, darkicon = Icons.dark_mode;
+IconData lighticon = Icons.light_mode_outlined,
+    darkicon = Icons.dark_mode,
+    closeicon = Icons.close,
+    addtaskicon = Icons.add_task;

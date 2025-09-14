@@ -1,7 +1,13 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:to_do_app/Controller/Constants/UiConstants.dart';
+import 'package:to_do_app/Controller/Utilities/Actions.dart';
 import 'package:to_do_app/View/Helpers/ColorContents.dart';
+import 'package:to_do_app/View/Helpers/IconContents.dart';
+import 'package:to_do_app/View/Screens/Taskdisplaypage.dart';
 import 'package:to_do_app/View/Typography/Appbar.dart';
+import 'package:to_do_app/View/Typography/Bottomsheet.dart';
+import 'package:to_do_app/View/Typography/ButtonStyles.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -21,6 +27,27 @@ class _MainScreenState extends State<MainScreen> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
         child: appbar2(context),
+      ),
+      body: PopScope(
+        canPop: false, // Prevents the route from being popped automatically
+        onPopInvokedWithResult: (didPop, result) async {
+          await backbuttonaction(context, didPop);
+        },
+        child: Taskdisplaypage(),
+      ),
+      floatingActionButton: floatingbutton(
+        context,
+        addtaskicon,
+        addtaskbuttontext,
+        (a) {
+          bottomSheet1(
+            context,
+            addtasktext,
+            [titletext, descriptiontext],
+            [1, 1],
+            (title, description) {},
+          );
+        },
       ),
     );
   }
