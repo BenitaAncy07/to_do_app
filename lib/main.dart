@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:provider/provider.dart';
 import 'package:to_do_app/Controller/Constants/UiConstants.dart';
+import 'package:to_do_app/Controller/Providers/TaskProvider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => TaskProvider())],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
