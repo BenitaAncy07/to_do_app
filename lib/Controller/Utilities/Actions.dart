@@ -11,3 +11,19 @@ initialcheck(BuildContext context) async {
     AdaptiveTheme.of(context).setDark();
   }
 }
+
+//===========================Theme change==========================
+themechange(context) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  if (prefs.getString(themetext) == null) {
+    AdaptiveTheme.of(context).setDark();
+    prefs.setString(themetext, darktext);
+  } else if (prefs.getString(themetext) == darktext) {
+    AdaptiveTheme.of(context).setLight();
+    prefs.setString(themetext, lighttext);
+  } else if (prefs.getString(themetext) == lighttext) {
+    AdaptiveTheme.of(context).setDark();
+    prefs.setString(themetext, darktext);
+  }
+}

@@ -11,7 +11,7 @@ class TaskProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleTask(int index) {
+  void updateTaskstatus(int index) {
     _tasks[index].taskCompleted();
     notifyListeners();
   }

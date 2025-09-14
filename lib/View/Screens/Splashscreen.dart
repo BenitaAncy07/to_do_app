@@ -1,9 +1,11 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/Material.dart';
 import 'package:easy_splash_screen/easy_splash_screen.dart';
+import 'package:flutter/services.dart';
 import 'package:to_do_app/Controller/Utilities/Actions.dart';
 import 'package:to_do_app/View/Helpers/ColorContents.dart';
 import 'package:to_do_app/View/Helpers/ImageContents.dart';
+import 'package:to_do_app/View/Screens/MainScreen.dart';
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
@@ -17,6 +19,9 @@ class _SplashscreenState extends State<Splashscreen> {
   void initState() {
     super.initState();
     initialcheck(context);
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(statusBarColor: transparent),
+    );
   }
 
   @override
@@ -29,7 +34,7 @@ class _SplashscreenState extends State<Splashscreen> {
               ? lighttheme
               : darktheme,
       showLoader: false,
-      //  navigator: MainScreen(),
+      navigator: MainScreen(),
       durationInSeconds: 2,
     );
   }
