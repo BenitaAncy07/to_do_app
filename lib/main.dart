@@ -3,6 +3,7 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/Controller/Constants/UiConstants.dart';
 import 'package:to_do_app/Controller/Providers/TaskProvider.dart';
+import 'package:to_do_app/View/Screens/Splashscreen.dart';
 
 void main() {
   runApp(
@@ -22,8 +23,11 @@ class MyApp extends StatelessWidget {
       dark: ThemeData.dark().copyWith(),
       initial: AdaptiveThemeMode.light,
       builder:
-          (theme, darkTheme) =>
-              MaterialApp(title: appname, debugShowCheckedModeBanner: false),
+          (theme, darkTheme) => MaterialApp(
+            title: appname,
+            debugShowCheckedModeBanner: false,
+            home: Splashscreen(),
+          ),
     );
   }
 }
