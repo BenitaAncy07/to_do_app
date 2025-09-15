@@ -26,4 +26,5 @@ String titletext = "Title",
     addtasktext = "New Task",
     searchhinttext = "Search task .....",
     completedtext = 'Completed',
-    notcompletedtext = "Not completed";
+    notcompletedtext = "Not completed",
+    notaskfoundtext = "No Task Found Yet";

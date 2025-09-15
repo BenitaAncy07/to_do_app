@@ -23,95 +23,120 @@ class _TaskdisplaypageState extends State<Taskdisplaypage> {
   TextEditingController searchcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.only(top: 10),
-        child: Column(
-          children: [
-            // if (Provider.of<TaskProvider>(
-            //   context,
-            //   listen: true,
-            // ).tasks.isNotEmpty)
-            //   searchbarwidget(context),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.85,
-              width: double.infinity,
-              child: ListView.builder(
-                itemCount:
-                    Provider.of<TaskProvider>(
-                      context,
-                      listen: true,
-                    ).tasks.length,
-                itemBuilder: (context, index) {
-                  return SizedBox(
-                    width: MediaQuery.of(context).size.width - 10,
-                    child: Card(
+    return Provider.of<TaskProvider>(context, listen: true).tasks.isEmpty
+        ? Center(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Image.asset(todoimg, height: 200),
+                Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: Text(
+                    notaskfoundtext,
+                    style: TextStyle(
+                      fontSize: textsize6,
                       color:
                           AdaptiveTheme.of(context).mode ==
                                   AdaptiveThemeMode.light
-                              ? lighttheme
-                              : darktheme,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      elevation: 1,
-                      child: Container(
-                        decoration: BoxDecoration(
+                              ? black
+                              : lighttheme,
+                      fontFamily: headingfont,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        )
+        : SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.only(top: 10),
+            child: Column(
+              children: [
+                // if (Provider.of<TaskProvider>(
+                //   context,
+                //   listen: true,
+                // ).tasks.isNotEmpty)
+                //   searchbarwidget(context),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.85,
+                  width: double.infinity,
+                  child: ListView.builder(
+                    itemCount:
+                        Provider.of<TaskProvider>(
+                          context,
+                          listen: true,
+                        ).tasks.length,
+                    itemBuilder: (context, index) {
+                      return SizedBox(
+                        width: MediaQuery.of(context).size.width - 10,
+                        child: Card(
                           color:
                               AdaptiveTheme.of(context).mode ==
                                       AdaptiveThemeMode.light
                                   ? lighttheme
                                   : darktheme,
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border(
-                            left: BorderSide(
-                              color: hexToColor(goldencolor),
-                              width: 5,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          elevation: 1,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color:
+                                  AdaptiveTheme.of(context).mode ==
+                                          AdaptiveThemeMode.light
+                                      ? lighttheme
+                                      : darktheme,
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border(
+                                left: BorderSide(
+                                  color: hexToColor(goldencolor),
+                                  width: 5,
+                                ),
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: black.withOpacity(0.2),
+                                  blurRadius: 8,
+                                  offset: Offset(0, 4),
+                                ),
+                              ],
+                            ),
+                            padding: EdgeInsets.only(
+                              left: 10,
+                              right: 10,
+                              bottom: 5,
+                              top: 10,
+                            ),
+                            child: Row(
+                              children: [
+                                contentshowwidget(
+                                  context,
+                                  Provider.of<TaskProvider>(
+                                    context,
+                                    listen: true,
+                                  ).tasks[index],
+                                ),
+                                buttonshowwidget(
+                                  context,
+                                  Provider.of<TaskProvider>(
+                                    context,
+                                    listen: true,
+                                  ).tasks[index],
+                                  index,
+                                ),
+                              ],
                             ),
                           ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: black.withOpacity(0.2),
-                              blurRadius: 8,
-                              offset: Offset(0, 4),
-                            ),
-                          ],
                         ),
-                        padding: EdgeInsets.only(
-                          left: 10,
-                          right: 10,
-                          bottom: 5,
-                          top: 10,
-                        ),
-                        child: Row(
-                          children: [
-                            contentshowwidget(
-                              context,
-                              Provider.of<TaskProvider>(
-                                context,
-                                listen: true,
-                              ).tasks[index],
-                            ),
-                            buttonshowwidget(
-                              context,
-                              Provider.of<TaskProvider>(
-                                context,
-                                listen: true,
-                              ).tasks[index],
-                              index,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    );
+          ),
+        );
   }
 
   // //============================searchbar widget================================
