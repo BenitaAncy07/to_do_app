@@ -20,7 +20,11 @@ The To-Do App is a lightweight, responsive task management application built usi
  * Card-Based Presentation: Each task is displayed inside a styled card for better readability.
  * Dark/Light Theme Support (optional): Can be extended using AdaptiveTheme or similar packages.
 
+<<<<<<< HEAD
 ## **Architecture & State Management :**
+=======
+## **Architecture & State Management:**
+>>>>>>> 3b8f040aa5f4a1a338b4fe3f27f88d8b65b88781
  * Flutter Framework: For cross-platform mobile development.
  * Provider Package: Used for efficient and scalable state management.
  * Modular Codebase: Separation of concerns between UI, logic, and data models.
