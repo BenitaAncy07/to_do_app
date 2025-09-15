@@ -1,13 +1,16 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:to_do_app/Controller/Constants/UiConstants.dart';
+import 'package:to_do_app/Controller/Providers/TaskProvider.dart';
 import 'package:to_do_app/Controller/Utilities/Hexconversion.dart';
 import 'package:to_do_app/Model/task.dart';
 import 'package:to_do_app/View/Helpers/ColorContents.dart';
 import 'package:to_do_app/View/Helpers/FontContents.dart';
 import 'package:to_do_app/View/Helpers/IconContents.dart';
 import 'package:to_do_app/View/Helpers/ImageContents.dart';
-import 'package:to_do_app/View/Typography/dialogbox.dart';
 
 class Taskdisplaypage extends StatefulWidget {
   const Taskdisplaypage({super.key});
@@ -25,12 +28,20 @@ class _TaskdisplaypageState extends State<Taskdisplaypage> {
         padding: EdgeInsets.only(top: 10),
         child: Column(
           children: [
-            searchbarwidget(context),
+            // if (Provider.of<TaskProvider>(
+            //   context,
+            //   listen: true,
+            // ).tasks.isNotEmpty)
+            //   searchbarwidget(context),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.8,
+              height: MediaQuery.of(context).size.height * 0.85,
               width: double.infinity,
               child: ListView.builder(
-                itemCount: 10,
+                itemCount:
+                    Provider.of<TaskProvider>(
+                      context,
+                      listen: true,
+                    ).tasks.length,
                 itemBuilder: (context, index) {
                   return SizedBox(
                     width: MediaQuery.of(context).size.width - 10,
@@ -76,19 +87,18 @@ class _TaskdisplaypageState extends State<Taskdisplaypage> {
                           children: [
                             contentshowwidget(
                               context,
-                              Task(
-                                title: "$index Edit Picture today",
-                                description:
-                                    "Remove background. Crop the picture. Make it size 100 x 100. Convert it into png format and compress it.",
-                              ),
+                              Provider.of<TaskProvider>(
+                                context,
+                                listen: true,
+                              ).tasks[index],
                             ),
                             buttonshowwidget(
                               context,
-                              Task(
-                                title: "$index Edit Picture today",
-                                description:
-                                    "Remove background. Crop the picture. Make it size 100 x 100. Convert it into png format and compress it.",
-                              ),
+                              Provider.of<TaskProvider>(
+                                context,
+                                listen: true,
+                              ).tasks[index],
+                              index,
                             ),
                           ],
                         ),
@@ -104,65 +114,68 @@ class _TaskdisplaypageState extends State<Taskdisplaypage> {
     );
   }
 
-  //============================searchbar widget================================
-  Widget searchbarwidget(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(5),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 1,
-            child: TextField(
-              controller: searchcontroller,
-              cursorColor: hexToColor(goldencolor),
-              style: TextStyle(
-                fontSize: textsize3,
-                fontFamily: headingfont,
-                color:
-                    AdaptiveTheme.of(context).mode == AdaptiveThemeMode.light
-                        ? black
-                        : lighttheme,
-              ),
-              decoration: InputDecoration(
-                hintText: searchhinttext,
-                hintStyle: TextStyle(
-                  fontSize: textsize3,
-                  fontFamily: headingfont,
-                  color:
-                      AdaptiveTheme.of(context).mode == AdaptiveThemeMode.light
-                          ? black.withOpacity(0.5)
-                          : lighttheme.withOpacity(0.5),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(
-                    color: hexToColor(goldencolor),
-                    width: 1.0,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(
-                    color: hexToColor(goldencolor),
-                    width: 1.0,
-                  ),
-                ),
+  // //============================searchbar widget================================
+  // Widget searchbarwidget(BuildContext context) {
+  //   return Padding(
+  //     padding: EdgeInsets.all(5),
+  //     child: Row(
+  //       children: [
+  //         Expanded(
+  //           flex: 1,
+  //           child: TextField(
+  //             controller: searchcontroller,
+  //             cursorColor: hexToColor(goldencolor),
+  //             style: TextStyle(
+  //               fontSize: textsize3,
+  //               fontFamily: headingfont,
+  //               color:
+  //                   AdaptiveTheme.of(context).mode == AdaptiveThemeMode.light
+  //                       ? black
+  //                       : lighttheme,
+  //             ),
+  //             decoration: InputDecoration(
+  //               hintText: searchhinttext,
+  //               hintStyle: TextStyle(
+  //                 fontSize: textsize3,
+  //                 fontFamily: headingfont,
+  //                 color:
+  //                     AdaptiveTheme.of(context).mode == AdaptiveThemeMode.light
+  //                         ? black.withOpacity(0.5)
+  //                         : lighttheme.withOpacity(0.5),
+  //               ),
+  //               enabledBorder: OutlineInputBorder(
+  //                 borderRadius: BorderRadius.circular(8),
+  //                 borderSide: BorderSide(
+  //                   color: hexToColor(goldencolor),
+  //                   width: 1.0,
+  //                 ),
+  //               ),
+  //               focusedBorder: OutlineInputBorder(
+  //                 borderRadius: BorderRadius.circular(8),
+  //                 borderSide: BorderSide(
+  //                   color: hexToColor(goldencolor),
+  //                   width: 1.0,
+  //                 ),
+  //               ),
 
-                prefixIcon: Icon(
-                  searchicon,
-                  color: hexToColor(goldencolor),
-                  size: iconsize2,
-                ),
-              ),
-              onSubmitted: (value) {
-                // searchaction(context, searchcontroller.text);
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  //               prefixIcon: Icon(
+  //                 searchicon,
+  //                 color: hexToColor(goldencolor),
+  //                 size: iconsize2,
+  //               ),
+  //             ),
+  //             onChanged: (value) {
+  //               Provider.of<TaskProvider>(
+  //                 context,
+  //                 listen: false,
+  //               ).searchTask(value);
+  //             },
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   //===========================Content show widget========================
   Widget contentshowwidget(BuildContext context, Task item) {
@@ -174,10 +187,13 @@ class _TaskdisplaypageState extends State<Taskdisplaypage> {
             item.title,
             style: TextStyle(
               fontSize: textsize4,
-              color:
-                  AdaptiveTheme.of(context).mode == AdaptiveThemeMode.light
-                      ? black
-                      : lighttheme,
+              color: item.isCompleted ? green : red,
+              decoration:
+                  item.isCompleted
+                      ? TextDecoration.lineThrough
+                      : TextDecoration.none,
+              decorationThickness: 2,
+              decorationColor: item.isCompleted ? green : null,
               fontFamily: headingfont,
               fontWeight: FontWeight.bold,
             ),
@@ -190,6 +206,15 @@ class _TaskdisplaypageState extends State<Taskdisplaypage> {
                   AdaptiveTheme.of(context).mode == AdaptiveThemeMode.light
                       ? black
                       : lighttheme,
+              decoration:
+                  item.isCompleted
+                      ? TextDecoration.lineThrough
+                      : TextDecoration.none,
+              decorationColor:
+                  AdaptiveTheme.of(context).mode == AdaptiveThemeMode.light
+                      ? black
+                      : lighttheme,
+              decorationThickness: 1,
               fontFamily: headingfont,
             ),
           ),
@@ -199,10 +224,10 @@ class _TaskdisplaypageState extends State<Taskdisplaypage> {
   }
 
   //========================button widget=======================
-  buttonshowwidget(BuildContext context, Task item) {
+  buttonshowwidget(BuildContext context, Task item, int index) {
     return Column(
       children: [
-        Image.asset(todoimg, height: 80, width: 80),
+        Image.asset(todoimg, height: 50, width: 50),
         Text(
           item.isCompleted ? completedtext : notcompletedtext,
           style: TextStyle(
@@ -238,7 +263,10 @@ class _TaskdisplaypageState extends State<Taskdisplaypage> {
 
               child: IconButton(
                 onPressed: () {
-                  dialogbox(context, deleteheading, deletecontent, (a) {});
+                  Provider.of<TaskProvider>(
+                    context,
+                    listen: false,
+                  ).deleteTask(context, index);
                 },
                 icon: Icon(
                   Icons.delete_outline,
@@ -270,10 +298,10 @@ class _TaskdisplaypageState extends State<Taskdisplaypage> {
               child: Transform.scale(
                 scale: 0.6,
                 child: Switch(
-                  trackOutlineColor: MaterialStateProperty.resolveWith<Color?>((
-                    Set<MaterialState> states,
+                  trackOutlineColor: WidgetStateProperty.resolveWith<Color?>((
+                    Set<WidgetState> states,
                   ) {
-                    if (states.contains(MaterialState.selected)) {
+                    if (states.contains(WidgetState.selected)) {
                       return transparent;
                     }
                     return hexToColor(goldencolor);
@@ -289,7 +317,12 @@ class _TaskdisplaypageState extends State<Taskdisplaypage> {
                   activeTrackColor: hexToColor(goldencolor),
                   inactiveTrackColor: hexToColor(goldencolor).withOpacity(0.3),
                   value: item.isCompleted,
-                  onChanged: (bool newValue) {},
+                  onChanged: (bool newValue) {
+                    Provider.of<TaskProvider>(
+                      context,
+                      listen: false,
+                    ).updateTaskstatus(index);
+                  },
                 ),
               ),
             ),

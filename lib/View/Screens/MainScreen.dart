@@ -1,12 +1,13 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:to_do_app/Controller/Constants/UiConstants.dart';
+import 'package:to_do_app/Controller/Providers/TaskProvider.dart';
 import 'package:to_do_app/Controller/Utilities/Actions.dart';
 import 'package:to_do_app/View/Helpers/ColorContents.dart';
 import 'package:to_do_app/View/Helpers/IconContents.dart';
 import 'package:to_do_app/View/Screens/Taskdisplaypage.dart';
 import 'package:to_do_app/View/Typography/Appbar.dart';
-import 'package:to_do_app/View/Typography/Bottomsheet.dart';
 import 'package:to_do_app/View/Typography/ButtonStyles.dart';
 
 class MainScreen extends StatefulWidget {
@@ -36,16 +37,14 @@ class _MainScreenState extends State<MainScreen> {
         child: Taskdisplaypage(),
       ),
       floatingActionButton: Padding(
-        padding: EdgeInsets.only(bottom: 50),
+        padding: EdgeInsets.only(
+          bottom:
+              Provider.of<TaskProvider>(context, listen: true).tasks.length < 3
+                  ? 20
+                  : 0,
+        ),
         child: floatingbutton(context, addtaskicon, addtaskbuttontext, (a) {
-          bottomSheet1(
-            context,
-            addtasktext,
-            [titletext, descriptiontext],
-            [1, 1],
-            [1, 3],
-            (title, description) {},
-          );
+          Provider.of<TaskProvider>(context, listen: false).addTask(context);
         }),
       ),
     );
