@@ -14,4 +14,6 @@ double iconsize0 = 72,
 IconData lighticon = Icons.light_mode_outlined,
     darkicon = Icons.dark_mode,
     closeicon = Icons.close,
-    addtaskicon = Icons.add_task;
+    addtaskicon = Icons.add_task,
+    searchicon = Icons.search,
+    righticon = Icons.check_circle;

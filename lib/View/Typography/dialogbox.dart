@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/Material.dart';
 import 'package:to_do_app/Controller/Constants/UiConstants.dart';
@@ -7,7 +5,7 @@ import 'package:to_do_app/Controller/Utilities/Hexconversion.dart';
 import 'package:to_do_app/View/Helpers/ColorContents.dart';
 import 'package:to_do_app/View/Helpers/FontContents.dart';
 
-exitdialogbox(BuildContext context) {
+dialogbox(BuildContext context, String heading, String content, submitaction) {
   showDialog<bool>(
     context: context,
     builder:
@@ -17,7 +15,7 @@ exitdialogbox(BuildContext context) {
                   ? lighttheme
                   : darktheme,
           title: Text(
-            exitheading,
+            heading,
             style: TextStyle(
               fontSize: textsize7,
               color: hexToColor(goldencolor),
@@ -26,7 +24,7 @@ exitdialogbox(BuildContext context) {
             ),
           ),
           content: Text(
-            exitcontent,
+            content,
             style: TextStyle(
               fontSize: textsize5,
               color:
@@ -54,7 +52,7 @@ exitdialogbox(BuildContext context) {
             ),
             TextButton(
               onPressed: () {
-                exit(0);
+                submitaction(true);
               },
               child: Text(
                 yesbuttontext,

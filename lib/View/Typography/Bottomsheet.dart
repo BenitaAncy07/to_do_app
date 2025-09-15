@@ -11,6 +11,7 @@ void bottomSheet1(
   String heading,
   List textfieldheading,
   List starrequired,
+  List maxlines,
   submitaction,
 ) {
   final formKey1 = GlobalKey<FormState>();
@@ -54,7 +55,7 @@ void bottomSheet1(
                         textbox1controller,
                         box1Focus,
                         starrequired[0],
-                        1,
+                        maxlines[0],
                         textfieldheading[0],
                         "",
                         "",
@@ -71,7 +72,7 @@ void bottomSheet1(
                         textbox2controller,
                         box2Focus,
                         starrequired[1],
-                        1,
+                        maxlines[1],
                         textfieldheading[1],
                         "",
                         "",

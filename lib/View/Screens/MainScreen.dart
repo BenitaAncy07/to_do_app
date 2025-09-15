@@ -30,24 +30,23 @@ class _MainScreenState extends State<MainScreen> {
       ),
       body: PopScope(
         canPop: false, // Prevents the route from being popped automatically
-        onPopInvokedWithResult: (didPop, result) async {
-          await backbuttonaction(context, didPop);
+        onPopInvokedWithResult: (didPop, result) {
+          backbuttonaction(context, didPop);
         },
         child: Taskdisplaypage(),
       ),
-      floatingActionButton: floatingbutton(
-        context,
-        addtaskicon,
-        addtaskbuttontext,
-        (a) {
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(bottom: 50),
+        child: floatingbutton(context, addtaskicon, addtaskbuttontext, (a) {
           bottomSheet1(
             context,
             addtasktext,
             [titletext, descriptiontext],
             [1, 1],
+            [1, 3],
             (title, description) {},
           );
-        },
+        }),
       ),
     );
   }

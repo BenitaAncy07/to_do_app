@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:to_do_app/Controller/Constants/AppConstants.dart';
+import 'package:to_do_app/Controller/Constants/UiConstants.dart';
 import 'package:to_do_app/View/Typography/dialogbox.dart';
 
 //=========================initial check in splashscreen==============================
@@ -31,13 +34,15 @@ themechange(context) async {
 }
 
 //==========================backbutton action===========================
-backbuttonaction(BuildContext context, bool didPop) async {
+backbuttonaction(BuildContext context, bool didPop) {
   if (!kIsWeb) {
     if (didPop) {
       return;
     }
 
-    await exitdialogbox(context);
+    dialogbox(context, exitheading, exitcontent, (a) {
+      exit(0);
+    });
   }
 }
 
